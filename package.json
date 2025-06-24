@@ -1,0 +1,30 @@
+{
+  "name": "signer3",
+  "version": "1.0.0",
+  "description": "MultiSig arbitrator solution for bitcoin collateral",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000",
+    "serve": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "bitcoin",
+    "multisig",
+    "collateral",
+    "arbitration",
+    "timelock"
+  ],
+  "author": "Signer3",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/signer3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/signer3/issues"
+  },
+  "homepage": "https://github.com/your-username/signer3#readme"
+}

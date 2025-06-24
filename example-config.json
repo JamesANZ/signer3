@@ -1,0 +1,15 @@
+{
+  "walletAddress": "tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sl5k7",
+  "redeemScript": "522102a0434d9e47f3c86235477c7b1ae6ae5d3442d49b1943c2b752a68e2a47e247c72102b0434d9e47f3c86235477c7b1ae6ae5d3442d49b1943c2b752a68e2a47e247c72102c0434d9e47f3c86235477c7b1ae6ae5d3442d49b1943c2b752a68e2a47e247c753ae",
+  "witnessScript": "522102a0434d9e47f3c86235477c7b1ae6ae5d3442d49b1943c2b752a68e2a47e247c72102b0434d9e47f3c86235477c7b1ae6ae5d3442d49b1943c2b752a68e2a47e247c72102c0434d9e47f3c86235477c7b1ae6ae5d3442d49b1943c2b752a68e2a47e247c753ae",
+  "publicKeys": {
+    "borrower": "02a0434d9e47f3c86235477c7b1ae6ae5d3442d49b1943c2b752a68e2a47e247c7",
+    "lender": "02b0434d9e47f3c86235477c7b1ae6ae5d3442d49b1943c2b752a68e2a47e247c7",
+    "signer3": "02c0434d9e47f3c86235477c7b1ae6ae5d3442d49b1943c2b752a68e2a47e247c7"
+  },
+  "network": "testnet",
+  "includeTimelock": false,
+  "timelockBlocks": 144,
+  "createdAt": "2024-01-15T10:30:00.000Z",
+  "description": "2-of-3 Multisig Wallet created with Signer3"
+}

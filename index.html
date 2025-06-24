@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signer3 - Multisig Wallet Creator</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="
+https://cdn.jsdelivr.net/npm/bitcoinjs-lib@6.1.7/src/index.min.js
+"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bip32@4.0.0/src/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bip39@3.1.0/src/index.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Signer3</h1>
+        <p class="subtitle">
+          MultiSig Arbitrator Solution for Bitcoin Collateral
+        </p>
+      </header>
+
+      <main>
+        <div class="card">
+          <h2>Create 2-of-3 Multisig Wallet</h2>
+          <p class="description">
+            Create a secure multisig wallet with borrower, lender, and Signer3
+            as signatories. Funds can be spent when any 2 of the 3 parties
+            agree.
+          </p>
+
+          <form id="multisigForm">
+            <div class="form-group">
+              <label for="borrowerKey"
+                >Borrower's Public Key (xpub or public key)</label
+              >
+              <input
+                type="text"
+                id="borrowerKey"
+                name="borrowerKey"
+                required
+                placeholder="Enter borrower's xpub or public key"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="lenderKey"
+                >Lender's Public Key (xpub or public key)</label
+              >
+              <input
+                type="text"
+                id="lenderKey"
+                name="lenderKey"
+                required
+                placeholder="Enter lender's xpub or public key"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="network">Network</label>
+              <select id="network" name="network">
+                <option value="testnet">Testnet</option>
+                <option value="mainnet">Mainnet</option>
+              </select>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input
+                  type="checkbox"
+                  id="includeTimelock"
+                  name="includeTimelock"
+                />
+                <span class="checkmark"></span>
+                Include CSV Timelock Recovery
+              </label>
+              <p class="help-text">
+                When enabled, Signer3 can recover funds after a specified time
+                if both borrower and lender lose access to their keys.
+              </p>
+            </div>
+
+            <div
+              class="form-group timelock-options"
+              id="timelockOptions"
+              style="display: none"
+            >
+              <label for="timelockBlocks">Timelock Duration (blocks)</label>
+              <input
+                type="number"
+                id="timelockBlocks"
+                name="timelockBlocks"
+                min="1"
+                max="65535"
+                value="144"
+                placeholder="144 (approximately 1 day)"
+              />
+              <p class="help-text">
+                Number of blocks before Signer3 can recover funds. 144 blocks ≈
+                1 day.
+              </p>
+            </div>
+
+            <button type="submit" class="btn-primary">
+              Create Multisig Wallet
+            </button>
+          </form>
+        </div>
+
+        <div class="card result-card" id="resultCard" style="display: none">
+          <h3>Generated Multisig Wallet</h3>
+
+          <div class="result-section">
+            <h4>Wallet Address</h4>
+            <div class="code-block">
+              <code id="walletAddress"></code>
+              <button
+                class="btn-copy"
+                onclick="copyToClipboard('walletAddress')"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+
+          <div class="result-section">
+            <h4>Redeem Script</h4>
+            <div class="code-block">
+              <code id="redeemScript"></code>
+              <button
+                class="btn-copy"
+                onclick="copyToClipboard('redeemScript')"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+
+          <div class="result-section">
+            <h4>Witness Script</h4>
+            <div class="code-block">
+              <code id="witnessScript"></code>
+              <button
+                class="btn-copy"
+                onclick="copyToClipboard('witnessScript')"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+
+          <div class="result-section">
+            <h4>Public Keys</h4>
+            <div class="keys-list">
+              <div class="key-item">
+                <strong>Borrower:</strong>
+                <code id="borrowerPubKey"></code>
+              </div>
+              <div class="key-item">
+                <strong>Lender:</strong>
+                <code id="lenderPubKey"></code>
+              </div>
+              <div class="key-item">
+                <strong>Signer3:</strong>
+                <code id="signer3PubKey"></code>
+              </div>
+            </div>
+          </div>
+
+          <div class="download-section">
+            <button class="btn-download" onclick="downloadScript()">
+              Download Script Configuration
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <p>Signer3 - Secure Bitcoin Multisig Solutions</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
