@@ -29,7 +29,7 @@ Signer3 can also be configured as a recovery signer, an example of how this coul
 
 ## User Interface
 
-This repository includes a web-based user interface that allows users to create 2-of-3 multisig wallets with the following features:
+This repository includes a modern Next.js web application that allows users to create 2-of-3 multisig wallets with the following features:
 
 ### Features
 
@@ -39,23 +39,28 @@ This repository includes a web-based user interface that allows users to create 
 - **Network Support**: Works with both Bitcoin mainnet and testnet
 - **Script Download**: Download complete wallet configuration as JSON
 - **Modern UI**: Clean, responsive interface with copy-to-clipboard functionality
+- **TypeScript**: Full type safety and better development experience
+- **Tailwind CSS**: Modern, utility-first CSS framework
 
 ### How to Use
 
-1. **Start the Application**:
+1. **Install Dependencies**:
 
    ```bash
-   # Using Python (recommended)
-   python3 -m http.server 8000
-
-   # Or using npm
-   npm start
+   npm install
    ```
 
-2. **Open in Browser**:
-   Navigate to `http://localhost:8000`
+2. **Start Development Server**:
 
-3. **Create a Multisig Wallet**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Open in Browser**:
+   Navigate to `http://localhost:3000`
+
+4. **Create a Multisig Wallet**:
+
    - Enter the borrower's public key (xpub or raw public key)
    - Enter the lender's public key (xpub or raw public key)
    - Select the network (testnet/mainnet)
@@ -63,7 +68,7 @@ This repository includes a web-based user interface that allows users to create 
    - Set timelock duration if enabled
    - Click "Create Multisig Wallet"
 
-4. **Download Configuration**:
+5. **Download Configuration**:
    - Review the generated wallet address, scripts, and public keys
    - Use the copy buttons to copy individual values
    - Click "Download Script Configuration" to save the complete configuration
@@ -117,14 +122,44 @@ The application generates:
 
 #### Prerequisites
 
-- Modern web browser with JavaScript enabled
-- Python 3.x (for local server) or any HTTP server
+- Node.js 18.17.0 or higher
+- npm or yarn package manager
 
 #### Dependencies
 
-- bitcoinjs-lib: Bitcoin protocol implementation
-- bip32: BIP32 hierarchical deterministic wallets
-- bip39: BIP39 mnemonic generation
+- **Next.js 14**: React framework with App Router
+- **React 18**: UI library
+- **TypeScript**: Type safety
+- **Tailwind CSS**: Styling framework
+- **bitcoinjs-lib**: Bitcoin protocol implementation (via CDN)
+- **bip32**: BIP32 hierarchical deterministic wallets (via CDN)
+- **bip39**: BIP39 mnemonic generation (via CDN)
+
+#### Available Scripts
+
+```bash
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run start    # Start production server
+npm run lint     # Run ESLint
+```
+
+#### Project Structure
+
+```
+src/
+├── app/                 # Next.js App Router
+│   ├── layout.tsx      # Root layout with CDN scripts
+│   ├── page.tsx        # Main page component
+│   └── globals.css     # Global styles with Tailwind
+├── components/         # React components
+│   ├── MultisigForm.tsx
+│   └── ResultCard.tsx
+├── lib/               # Utility functions
+│   └── bitcoin.ts     # Bitcoin.js integration
+└── types/             # TypeScript type definitions
+    └── wallet.ts
+```
 
 #### Local Development
 
@@ -133,11 +168,28 @@ The application generates:
 git clone https://github.com/your-username/signer3.git
 cd signer3
 
-# Start development server
-python3 -m http.server 8000
+# Install dependencies
+npm install
 
-# Open http://localhost:8000 in your browser
+# Start development server
+npm run dev
+
+# Open http://localhost:3000 in your browser
 ```
+
+### CDN Libraries
+
+The application uses the following CDN libraries for Bitcoin functionality:
+
+- **bitcoinjs-lib**: `https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.2.0-1/bitcoinjs-min.js`
+- **bip32**: `https://cdn.jsdelivr.net/npm/bip32@4.0.0/src/index.min.js`
+- **bip39**: `https://cdn.jsdelivr.net/npm/bip39@3.1.0/src/index.min.js`
+
+These are loaded in the root layout and provide global objects:
+
+- `window.Bitcoin` - Bitcoin.js library
+- `window.bip32` - BIP32 library
+- `window.bip39` - BIP39 library
 
 ### License
 
