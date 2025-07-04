@@ -60,6 +60,7 @@ This repository includes a modern Next.js web application that allows users to c
    Navigate to `http://localhost:3000`
 
 4. **Create a Multisig Wallet**:
+
    - Enter the borrower's public key (xpub or raw public key)
    - Enter the lender's public key (xpub or raw public key)
    - Select the network (testnet/mainnet)

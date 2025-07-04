@@ -61,7 +61,12 @@ export default function MultisigForm({ onWalletCreated }: MultisigFormProps) {
       <h2>Create 2-of-3 Multisig Wallet</h2>
       <p className="description">
         Create a secure multisig wallet with borrower, lender, and Signer3 as
-        signatories. Funds can be spent when any 2 of the 3 parties agree.
+        signatories. Funds can be spent when any 2 of the 3 parties agree. See
+        more details{" "}
+        <a href={"https://github.com/JamesANZ/signer3/blob/main/README.md"}>
+          here
+        </a>
+        .
       </p>
 
       <form onSubmit={handleSubmit}>
@@ -119,7 +124,7 @@ export default function MultisigForm({ onWalletCreated }: MultisigFormProps) {
               checked={formData.includeTimelock}
               onChange={handleInputChange}
             />
-            <span>Include CSV Timelock Recovery</span>
+            <span> Include CSV Timelock Recovery</span>
           </label>
           <p className="help-text">
             When enabled, Signer3 can recover funds after a specified time if
