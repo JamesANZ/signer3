@@ -60,7 +60,6 @@ This repository includes a modern Next.js web application that allows users to c
    Navigate to `http://localhost:3000`
 
 4. **Create a Multisig Wallet**:
-
    - Enter the borrower's public key (xpub or raw public key)
    - Enter the lender's public key (xpub or raw public key)
    - Select the network (testnet/mainnet)
@@ -176,20 +175,6 @@ npm run dev
 
 # Open http://localhost:3000 in your browser
 ```
-
-### CDN Libraries
-
-The application uses the following CDN libraries for Bitcoin functionality:
-
-- **bitcoinjs-lib**: `https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.2.0-1/bitcoinjs-min.js`
-- **bip32**: `https://cdn.jsdelivr.net/npm/bip32@4.0.0/src/index.min.js`
-- **bip39**: `https://cdn.jsdelivr.net/npm/bip39@3.1.0/src/index.min.js`
-
-These are loaded in the root layout and provide global objects:
-
-- `window.Bitcoin` - Bitcoin.js library
-- `window.bip32` - BIP32 library
-- `window.bip39` - BIP39 library
 
 ### License
 
