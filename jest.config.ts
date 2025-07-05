@@ -1,22 +1,23 @@
-import type { Config } from 'jest';
+import type { Config } from "jest";
+import nextJest from "next/jest";
 
-const config: Config = {
-  testEnvironment: 'jsdom',
-  roots: ['<rootDir>/test'],
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
-  transform: {
-    '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
-  },
-  testMatch: ['**/?(*.)+(test).ts?(x)'],
-  collectCoverageFrom: [
-    'src/**/*.{js,jsx,ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/**/*.stories.{js,jsx,ts,tsx}',
-  ],
+const createJestConfig = nextJest({
+  dir: "./",
+});
+
+const customJestConfig: Config = {
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  testEnvironment: "jsdom",
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
+    "^@/(.*)$": "<rootDir>/src/$1",
   },
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
+  testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
+  collectCoverageFrom: [
+    "src/**/*.{js,jsx,ts,tsx}",
+    "!src/**/*.d.ts",
+    "!src/**/*.stories.{js,jsx,ts,tsx}",
+  ],
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"],
 };
 
-export default config; 
+export default createJestConfig(customJestConfig);

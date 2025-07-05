@@ -11,10 +11,10 @@ Many bitcoin collateralised loan providers require the borrower to give up full 
 Signer3 aims to resolve this issue by acting as a neutral third party and signatory in a bitcoin multisig used to hold funds as collateral. Using a 2 of 3 multisig as an example (with the borrower, lender and signer3 each holding a key), here's how a typical flow would look:
 
 1. The borrower deposits funds into the multisig
-2. When the borrower and lender agree, both parties co sign the transaction (without Signer3)
+2. When the borrower and lender agree, both parties co-sign the transaction (without Signer3)
 3. When the borrower and lender disagree, both parties go to court or a tribunal
-4. Signer3 steps in an co signers a transaction based on the outcome of the court dispute, using either the borrower or lenders key
-5. If either the borrower or lender lose access to their key or are compromised, signer3 can recover the funds with the functional signatory
+4. Signer3 signs a transaction based on the outcome of the court dispute, using either the borrower or lenders key
+5. If either the borrower or lender lose access to their key or are compromised, signer3 can recover the funds after the timelock has lapsed (optional)
 
 This example scenario can be expanded to include more signatories or a different threshold of required signatures.
 
@@ -60,7 +60,6 @@ This repository includes a modern Next.js web application that allows users to c
    Navigate to `http://localhost:3000`
 
 4. **Create a Multisig Wallet**:
-
    - Enter the borrower's public key (xpub or raw public key)
    - Enter the lender's public key (xpub or raw public key)
    - Select the network (testnet/mainnet)
