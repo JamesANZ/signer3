@@ -25,30 +25,25 @@ export interface WalletData {
   timelockBlocks: number;
 }
 
-export const derivePublicKey = async (
-  keyInput: string,
-  network: bitcoin.Network,
-): Promise<Buffer> => {
-  try {
-    // Check if input is an xpub
-    if (keyInput.startsWith("xpub") || keyInput.startsWith("tpub")) {
-      // For testnet, we need to handle the network properly
-      let xpub;
-      if (keyInput.startsWith("tpub")) {
-        // Testnet xpub
-        xpub = bip32.fromBase58(keyInput, bitcoin.networks.testnet);
-      } else {
-        // Mainnet xpub
-        xpub = bip32.fromBase58(keyInput, bitcoin.networks.bitcoin);
-      }
-      const child = xpub.derivePath("0/0");
-      return Buffer.from(child.publicKey);
+export const derivePublicKey = async (keyInput: string): Promise<Buffer> => {
+  // Check if input is an xpub
+  if (keyInput.startsWith("xpub") || keyInput.startsWith("tpub")) {
+    // For testnet, we need to handle the network properly
+    let xpub;
+    if (keyInput.startsWith("tpub")) {
+      // Testnet xpub
+      xpub = bip32.fromBase58(keyInput, bitcoin.networks.testnet);
     } else {
-      // Assume it's already a public key
-      return Buffer.from(keyInput, "hex");
+      // Mainnet xpub
+      xpub = bip32.fromBase58(keyInput, bitcoin.networks.bitcoin);
     }
-  } catch (error) {
-    throw new Error(`Invalid key format: ${error}`);
+    const child = xpub.derivePath("0/0");
+    return Buffer.from(child.publicKey);
+  } else if (keyInput.length == 130 || keyInput.length == 66) {
+    // Assume it's already a public key
+    return Buffer.from(keyInput, "hex");
+  } else {
+    throw new Error(`Invalid key format`);
   }
 };
 
@@ -155,8 +150,8 @@ export const createMultisigWallet = async (
         : bitcoin.networks.testnet;
 
     // Parse and derive public keys
-    const borrowerPubKey = await derivePublicKey(borrowerKey, bitcoinNetwork);
-    const lenderPubKey = await derivePublicKey(lenderKey, bitcoinNetwork);
+    const borrowerPubKey = await derivePublicKey(borrowerKey);
+    const lenderPubKey = await derivePublicKey(lenderKey);
 
     // For testing, use a simple public key instead of xpub to avoid network version issues
     const signer3PubKey = Buffer.from(SIGNER3_PUBLIC_KEY, "hex");
